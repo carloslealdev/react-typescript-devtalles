@@ -1,10 +1,16 @@
 import { createBrowserRouter } from 'react-router';
 import { HomePage } from '../heroes/pages/home/HomePage';
 import { HeroPage } from '@/heroes/pages/hero/HeroPage';
-import { SearchPage } from '@/heroes/pages/search/SearchPage';
 import { AdminPage } from '@/admin/pages/AdminPage';
 import { HeroesLayout } from '@/heroes/layouts/HeroesLayout';
 import { AdminLayout } from '@/admin/layouts/AdminLayout';
+import { lazy } from 'react';
+
+//Ejemplo de implementacion de lazy load en el componente SearchPage
+// import { SearchPage } from '@/heroes/pages/search/SearchPage';
+
+//El componente debe estar exportado por defecto en su documento
+const SearchPage = lazy(() => import('@/heroes/pages/search/SearchPage'));
 
 export const appRouter = createBrowserRouter([
   {
