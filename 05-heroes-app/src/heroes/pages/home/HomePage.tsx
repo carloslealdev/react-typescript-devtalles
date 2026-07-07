@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CustomJumbotron } from '../../../components/custom/CustomJumbotron';
 import { HeroStats } from '@/heroes/components/HeroStats';
 import { HeroGrid } from '@/heroes/components/HeroGrid';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CustomPagination } from '@/components/custom/CustomPagination';
 import { CustomBreadcrumbs } from '@/components/custom/CustomBreadcrumbs';
 import { getHeroesByPageAction } from '@/heroes/actions/get-heroes-by-page.actions';
@@ -19,11 +19,13 @@ export const HomePage = () => {
   //   getHeroesByPage().then();
   // }, []);
 
-  const { data } = useQuery({
+  const { data: heroesResponse } = useQuery({
     queryKey: ['heroes'],
     queryFn: () => getHeroesByPageAction(),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
+
+  console.log(heroesResponse);
 
   return (
     <>
@@ -66,7 +68,7 @@ export const HomePage = () => {
 
           <TabsContent value='all'>
             {/* Mostrar todos los personajes */}
-            <HeroGrid />
+            <HeroGrid heroes={heroesResponse?.heroes ?? []} />
           </TabsContent>
           <TabsContent value='favorites'>
             {/* Mostrar todos los personajes favoritos */}
