@@ -20,7 +20,8 @@ export const FavoriteHeroContext = createContext({} as FavoriteHeroContext);
 
 const getFavoritesFromLocalStorage = (): Hero[] => {
   const favorites = localStorage.getItem("favorites");
-  return favorites ? JSON.parse("favorites") : [];
+  // console.log(favorites);
+  return favorites ? JSON.parse(favorites) : [];
 };
 
 export const FavoriteHeroProvider = ({ children }: PropsWithChildren) => {
